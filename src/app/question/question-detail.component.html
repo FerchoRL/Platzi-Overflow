@@ -1,0 +1,65 @@
+
+<!-- Create an object for my question usin mat-card component-->
+
+<mat-card>
+	<mat-card-header>
+		<div mat-card-avatar>
+			<i mat-list-icon class="{{question.icon}} icon"></i>
+		</div>
+		<mat-card-title>
+			<h2>{{question.title}}</h2>
+		</mat-card-title>
+		<mat-card-subtitle>
+			<!-- Se utilizan Pipes, para un atributo de tiempo indicar cuando se realizo y como-->
+			<small>Fercho Lagunes - {{question.createdDate | amLocale: 'es' | amTimeAgo}}</small>
+		</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<p>{{question.description}}</p>
+	</mat-card-content>
+</mat-card>
+
+<div class="answers">
+	<h3 class="title-answers">Respuestas</h3>
+	<!--Implement a condition with ngIf-->
+	<!--<ul class="answer-list" *ngIf="question.answer?.length > 0">-->
+	<ul class="answer-list">
+		<li>
+			<h5>Jose Rámila
+				<small>Hace unos segundos</small>
+			</h5>
+			<p class="answer-description">Yo tengo la respuesta!</p>
+		</li>
+
+		<li>
+			<h5>Luis Fernando
+				<small>Hace unos segundos</small>
+			</h5>
+			<p class="answer-description">Yo tengo la respuesta!</p>
+		</li>
+
+		<li>
+			<h5>Cristian Rámila
+				<small>Hace unos segundos</small>
+			</h5>
+			<p class="answer-description">Yo tengo la respuesta!</p>
+		</li>
+
+		<li>
+			<h5>Cristian Rámila
+				<small>Hace unos segundos</small>
+			</h5>
+			<p class="answer-description">Yo tengo la respuesta!</p>
+		</li>
+
+		<li>
+			<h5>Cristian Rámila
+				<small>Hace unos segundos</small>
+			</h5>
+			<p class="answer-description">Yo tengo la respuesta!</p>
+		</li>
+	</ul>
+	<p *ngIf="question.answer?.length === 0">Sé el primero en responder la pregunta</p>
+	<!--Add answer form-->
+	<app-answer-form class="answer-form"></app-answer-form>
+</div>

@@ -1,0 +1,10 @@
+
+<!-- Create form for our answers -->
+<!-- When the form submit call method onSubmit() from answer-form.component passing the form-->
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+	<mat-form-field>
+		<textarea matInput placeholder="Respuesta" name="answerDescription" ngModel></textarea>
+	</mat-form-field>
+	<!--Import matbuttonModule and input Module in material module ts-->
+	<button type="submit" mat-raised-button color='accent'>Responder</button>
+</form>
