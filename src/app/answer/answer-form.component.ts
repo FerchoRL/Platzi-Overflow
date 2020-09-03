@@ -1,7 +1,8 @@
 //Create a ts component for my answer-form component
 import { Component,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Answer,User } from './answer.model';
+import { Answer } from './answer.model';
+import { User } from '../auth/user.model';
 import { Question } from '../question/question.model';
 
 //Indicate where can I find the template, which selector I will use and the css
@@ -19,7 +20,7 @@ export class AnswerFormComponent{
 			form.value.answerDescription,
 			this.question,
 			new Date(),
-			new User('Fernando','Lagunes')
+			new User('Fernando','Lagunes',null,null)
 		);
 		console.log(answer.question);
 		//Agrego la respuesta que genere aqui a la propiedad answer de mi pregunta

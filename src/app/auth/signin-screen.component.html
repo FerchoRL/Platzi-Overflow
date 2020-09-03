@@ -1,0 +1,13 @@
+<!--Create a form using reactive Forms-->
+<!--Implement the relation beetwen formGroup in my html and signinForm in my component-->
+
+<!--Implement the relation beetwen ngSubmit in my html and onSubmit() method in my component-->
+<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email" id="email">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput placeholder="Password" formControlName="password" id="password">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color='accent'><i class="devicon-go-plain login-logo"></i>Iniciar sesion</button>
+</form>

@@ -25,7 +25,7 @@
 	<ul class="answer-list" *ngIf="question.answer?.length > 0">
 		<!--El li va con un for para que cada vez que haga un comentario se agregue-->
 		<li *ngFor="let answer of question.answer">
-			<h5>{{ answer.user.firstName }} {{ answer.user.lastName }}
+			<h5>{{ answer.user.fullName() }}
 				<small>{{ answer.createDate | amLocale: 'es' | amTimeAgo }}</small>
 			</h5>
 			<p class="answer-description">{{ answer.description }}</p>
