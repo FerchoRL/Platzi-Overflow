@@ -1,0 +1,28 @@
+<!--Create a form using reactive forms-->
+<!--Implement the realtion beetwen formGroup in html and signupForm in my component-->
+<!--Implement the realation beetwen ngSubmit in my html and onSubmit() methid in my component-->
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+	<!--form field first name-->
+	<mat-form-field>
+		<input type="text" matInput placeholder="First name" formControlName="firstName" id="firstName">
+	</mat-form-field>
+	<!--form field last name-->
+	<mat-form-field>
+		<input type="text" matInput placeholder="Last name" formControlName="lastName" id="lastName">
+	</mat-form-field>
+	<!--form field email-->
+	<mat-form-field>
+		<input type="email" matInput placeholder="example@example.com" formControlName="email" id="email">
+	</mat-form-field>
+	<!--form field password-->
+	<mat-form-field>
+		<input type="password" matInput placeholder="Password" formControlName="password" id="password">
+	</mat-form-field>
+	<!--form field Repeat password-->
+	<mat-form-field>
+		<input type="password" matInput placeholder="Repeat password" formControlName="secondPass" id="secondPass">
+	</mat-form-field>
+	<!--Button signup-->
+	<button type="submit" mat-raised-button color='accent'><i class="devicon-ceylon-plain">Registrarse</i></button>
+
+</form>
