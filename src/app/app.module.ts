@@ -11,6 +11,8 @@ import { MomentModule } from 'angular2-moment';
 import { AnswerFormComponent } from './answer/answer-form.component';
 import { SignInScreenComponent } from './auth/signin-screen.component';
 import { SignUpScreenComponent } from './auth/signup-screen.component';
+import { QuestionListComponent } from './question/question-list.component';
+import {MatListModule} from '@angular/material/list';
 
 
 //Indicate which modules or declarations I will use in my project
@@ -20,7 +22,8 @@ import { SignUpScreenComponent } from './auth/signup-screen.component';
     QuestionDetailComponent,
     AnswerFormComponent,
     SignInScreenComponent,
-    SignUpScreenComponent
+    SignUpScreenComponent,
+    QuestionListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { SignUpScreenComponent } from './auth/signup-screen.component';
     MaterialModule,
     MomentModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

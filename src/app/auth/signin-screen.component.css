@@ -12,3 +12,14 @@ form *{
 	margin-right: 10px;
 	font-size: 20px;
 }
+
+.signup{
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.signup-logo{
+	display: inline;
+	margin-right: 10px;
+}
