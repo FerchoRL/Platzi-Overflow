@@ -1,0 +1,17 @@
+<form class="question-form" (ngSubmit)="onSubmit(questionForm)" #questionForm="ngForm">
+    <mat-form-field>
+        <input matInput placeholder="Titulo" name="title" ngModel>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Descripcion" name="description" ngModel>
+    </mat-form-field>
+
+    <!--Create the grid list for the icons-->
+
+    <mat-grid-list cols="3" rowHeight="3:2">
+        <mat-grid-tile *ngFor="let icon of icons">
+            <i mat-list-icon class="devicon-{{ icon.name }}-{{ getIconVersion(icon) }}"></i>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button type="submit" mat-raised-button color='accent'>Enviar</button>
+</form>

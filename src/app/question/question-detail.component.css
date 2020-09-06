@@ -32,3 +32,17 @@ h5 small{
 	z-index: 2;
 	border-top: 1px solid #dcdcdc;
 }
+
+.question-form{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.mat-form-field, button, mat-grid-list{
+	width: 80%;
+}
+
+mat-grid-list{
+	position: unset;
+}

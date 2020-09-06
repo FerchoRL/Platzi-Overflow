@@ -12,7 +12,8 @@ import { AnswerFormComponent } from './answer/answer-form.component';
 import { SignInScreenComponent } from './auth/signin-screen.component';
 import { SignUpScreenComponent } from './auth/signup-screen.component';
 import { QuestionListComponent } from './question/question-list.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { QuestionFormComponent } from './question/question-form.component';
 
 
 //Indicate which modules or declarations I will use in my project
@@ -23,7 +24,8 @@ import {MatListModule} from '@angular/material/list';
     AnswerFormComponent,
     SignInScreenComponent,
     SignUpScreenComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    QuestionFormComponent
   ],
   imports: [
     BrowserModule,
