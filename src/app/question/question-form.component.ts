@@ -25,7 +25,9 @@ export class QuestionFormComponent{
     onSubmit(form: NgForm){
         const question = new Question(
             form.value.title,
-            form.value.description
+            form.value.description,
+            new Date(),
+            form.value.question_Icon
         );
         console.log(question);
     }

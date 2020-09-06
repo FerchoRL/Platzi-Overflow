@@ -46,3 +46,7 @@ h5 small{
 mat-grid-list{
 	position: unset;
 }
+
+i{
+	font-size: 45px;
+}
