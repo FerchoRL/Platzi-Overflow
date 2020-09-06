@@ -50,3 +50,11 @@ mat-grid-list{
 i{
 	font-size: 45px;
 }
+
+.add-question{
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 40px;
+	font-size: 24px;
+}

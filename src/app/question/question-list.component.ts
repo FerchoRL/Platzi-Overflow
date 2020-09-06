@@ -6,7 +6,8 @@ const newQuestion = new Question(
 );
 @Component({
 	selector: 'app-question-list',
-	templateUrl: './question-list.component.html'
+	templateUrl: './question-list.component.html',
+	styleUrls: ['./question-detail.component.css']
 })
 
 export class QuestionListComponent{
