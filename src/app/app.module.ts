@@ -14,6 +14,7 @@ import { SignUpScreenComponent } from './auth/signup-screen.component';
 import { QuestionListComponent } from './question/question-list.component';
 import { MatListModule } from '@angular/material/list';
 import { QuestionFormComponent } from './question/question-form.component';
+import { Routing } from './app.routing';
 
 
 //Indicate which modules or declarations I will use in my project
@@ -35,7 +36,8 @@ import { QuestionFormComponent } from './question/question-form.component';
     MomentModule,
     FormsModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    Routing
   ],
   providers: [],
   bootstrap: [AppComponent]

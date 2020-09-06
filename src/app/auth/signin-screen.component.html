@@ -10,4 +10,8 @@
     <input type="password" matInput placeholder="Password" formControlName="password" id="password">
   </mat-form-field>
   <button type="submit" mat-raised-button color='accent'><i class="devicon-go-plain login-logo"></i>Iniciar sesion</button>
+  <p class="new-sign-up">
+		¿Eres nuevo?
+		<a mat-button color="primary" [routerLink]="['/signup']">Crear Usuario</a>
+	</p>
 </form>

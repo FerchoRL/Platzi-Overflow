@@ -23,3 +23,12 @@ form *{
 	display: inline;
 	margin-right: 10px;
 }
+
+p{
+	margin-top: 1rem;
+	text-align: center;
+}
+
+.mat-button{
+	display: initial;
+}

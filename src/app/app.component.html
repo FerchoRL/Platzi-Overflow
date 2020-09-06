@@ -1,11 +1,13 @@
 <!-- Create the code for my index -->
 
 <mat-toolbar color="primary">
-  <span>PlatziOverflow</span>
+  <!--With routeLink '/' indicate go to home-->
+  <span [routerLink]="['/']">PlatziOverflow</span>
   <span class="space"></span>
-  <mat-icon>account_circle</mat-icon>
+  <mat-icon [routerLink]="['/signin']">account_circle</mat-icon>
 </mat-toolbar>
 
+<router-outlet></router-outlet>
 <!--Create app questions detail
 <app-question-detail></app-question-detail>-->
 
@@ -19,5 +21,5 @@
 <app-question-list></app-question-list>-->
 
 
-<!--- create app-question form screen-->
-<app-question-form></app-question-form>
+<!--- create app-question form screen
+<app-question-form></app-question-form>-->
