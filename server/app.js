@@ -1,8 +1,14 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import { question } from './routes'
 
 //Nos devuelve en una variable nuestro servidor
 const app = express()
+
+//Read all jsons from client
+app.use(bodyParser.json());
+//Our server can read with UTF8
+app.use(bodyParser.urlencoded({ extended: true}));
 
 //If we are in an development environment we can use or server from any port
 if (process.env.NODE_ENV === 'development'){
