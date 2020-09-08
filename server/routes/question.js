@@ -6,10 +6,10 @@ const app = express.Router()
 
 const question = {
     _id: 1,
-    title: '¿Como reutilizo un componente en android?',
-    description: 'Miren esta es mi pregunta...',
+    title: '¿Como guardo una expresion regular en una variable en Angular?',
+    description: 'Pregunta que surgio en el curso de MEAN 2017',
     createdDate: new Date(),
-    icon: 'devicon-android-plain',
+    icon: 'devicon-angularjs-plain',
     answers: [],
     user: {
         firstName: 'Fercho',

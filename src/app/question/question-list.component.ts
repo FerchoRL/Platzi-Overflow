@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question } from './question.model';
+import { QuestionService } from './question.service'
 
-const newQuestion = new Question(
-	"¿Como guardo una expresion regular en una variable en Angular?","Pregunta que surgio en el curso de MEAN 2017", new Date(),'devicon-angularjs-plain'
-);
 @Component({
 	selector: 'app-question-list',
 	templateUrl: './question-list.component.html',
-	styleUrls: ['./question-detail.component.css']
+	styleUrls: ['./question-detail.component.css'],
+	providers: [QuestionService]//To conect my backend with my frontend
 })
 
-export class QuestionListComponent{
-	questions: Question[] = new Array(10).fill(newQuestion)
+export class QuestionListComponent implements OnInit{
+	constructor(private questionService: QuestionService){
+		//Angular can inject the object without any code
+	}
+	questions: Question[];
+	loading = true;//Indicate if we charge the data from backend
+
+	ngOnInit(){
+		this.questionService
+			.getQuestions()//Backend method for get questionList
+			.then((questions: Question[]) =>{
+				this.questions = questions;
+			})
+	}
 }
