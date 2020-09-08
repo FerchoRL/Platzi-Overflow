@@ -21,6 +21,7 @@ export class QuestionListComponent implements OnInit{
 			.getQuestions()//Backend method for get questionList
 			.then((questions: Question[]) =>{
 				this.questions = questions;
+				this.loading = false;//When charge all questions
 			})
 	}
 }

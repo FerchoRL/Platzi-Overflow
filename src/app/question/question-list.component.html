@@ -1,13 +1,16 @@
-<mat-list role="list">
-    <mat-list-item *ngFor="let question of questions" [routerLink]="['questions',question._id]">
-        <!--if I use an icon from material design, put icon name beetwen icon-->
-        <i *ngIf="question.icon === 'none'" mat-list-icon class="material-icons">help</i>
-        <!--if I use an icon from DEVICON, put icon name in icon class-->
-        <mat-icon *ngIf="question.icon !== 'none'" mat-list-icon  class="{{ question.icon }}"></mat-icon>
-        <h3 mat-line>{{ question.title }}</h3>
-        <p mat-line>
-            <small>{{ question.answers?.length }} respuestas - {{question.createdDate | amLocale: 'es' | amTimeAgo}}</small>
-        </p>
-    </mat-list-item>
-</mat-list>
-<button [routerLink]="['questions/new']" mat-mini-fab class="add-question">+</button>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading">
+    <mat-list role="list">
+        <mat-list-item *ngFor="let question of questions" [routerLink]="['questions',question._id]">
+            <!--if I use an icon from material design, put icon name beetwen icon-->
+            <i *ngIf="question.icon === 'none'" mat-list-icon class="material-icons">help</i>
+            <!--if I use an icon from DEVICON, put icon name in icon class-->
+            <mat-icon *ngIf="question.icon !== 'none'" mat-list-icon  class="{{ question.icon }}"></mat-icon>
+            <h3 mat-line>{{ question.title }}</h3>
+            <p mat-line>
+                <small>{{ question.answers?.length }} respuestas - {{question.createdDate | amLocale: 'es' | amTimeAgo}}</small>
+            </p>
+        </mat-list-item>
+    </mat-list>
+    <button [routerLink]="['questions/new']" mat-mini-fab class="add-question">+</button>
+</div>
