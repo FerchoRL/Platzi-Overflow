@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { question } from './routes'
-
+import formidable from 'express-formidable'
 //Nos devuelve en una variable nuestro servidor
 const app = express()
 
@@ -9,14 +9,15 @@ const app = express()
 app.use(bodyParser.json());
 //Our server can read with UTF8
 app.use(bodyParser.urlencoded({ extended: true}));
+//app.use(formidable({ encoding: 'utf-8', keepExtensions: true}))
 
 //If we are in an development environment we can use or server from any port
 if (process.env.NODE_ENV === 'development'){
     //Use express midleware and every those headers and methods can access to out service
     app.use((req, res, next) =>{
         res.setHeader('Access-Control-Allow-Origin', '*')
-        res.setHeader('Acces-Control-Allow-Headers', 'Origin, X-Request-with, Content-Type, Accept')
-        res.setHeader('Acces-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS')
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Request-with, Content-Type, Accept')
+        res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS')
         next()
     })
 }
