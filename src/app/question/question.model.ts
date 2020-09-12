@@ -7,7 +7,7 @@ export class Question {
 	description: string;
 	createdDate?: Date;
 	icon?: string;
-	answer: Answer[];
+	answers: Answer[];
 
 	constructor(
 		title: string,
@@ -20,6 +20,6 @@ export class Question {
 		this.description = description;
 		this.createdDate = createdDate;
 		this.icon = icon;
-		this.answer = [];
+		this.answers = [];
 	}
 }

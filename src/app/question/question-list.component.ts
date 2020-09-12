@@ -22,6 +22,7 @@ export class QuestionListComponent implements OnInit{
 			.then((questions: Question[]) =>{
 				this.questions = questions;
 				this.loading = false;//When charge all questions
+				console.log(this.questions)
 			})
 	}
 }

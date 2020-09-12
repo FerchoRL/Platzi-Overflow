@@ -5,10 +5,11 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import urljoin from 'url-join';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { Answer } from '../answer/answer.model';
 
 
-//Define methods to get questionList and questionID from backend
+//Define functions to send the methods to backend
 @Injectable()
 export class QuestionService {
 
@@ -46,6 +47,27 @@ export class QuestionService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         //Create the post to our questionsUrl
         return this.http.post(this.questionsUrl, body, { headers })
+        //catch is replaced with catchError and the pipe operator is used to compose the operators in similar manner to what you're used to with dot-chaining.
+            .pipe(
+                catchError((error: Response) => Observable.throw(error.json))
+            );
+    }
+
+    //Method to create a new answer for the question
+    addAnswer(answer: Answer): Observable<any>{
+        const a = {
+            description: answer.description,
+            question:{
+                _id: answer.question._id
+            }
+        }
+        //Create an string of the question
+        //Our body only contain the question id and the description
+        const body = JSON.stringify(a);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        //Create the post to our answersUrl
+        const url = urljoin(this.questionsUrl, answer.question._id.toString(), 'answers')
+        return this.http.post(url, body, { headers })
             .pipe(
                 catchError((error: Response) => Observable.throw(error.json))
             );
