@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import urljoin from 'url-join';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import { throwError } from 'rxjs';
 import { Question } from './question.model';
 import { environment } from '../../environments/environment';
 import { Answer } from '../answer/answer.model';
@@ -50,7 +50,7 @@ export class QuestionService {
         return this.http.post(this.questionsUrl, body, { headers })
         //catch is replaced with catchError and the pipe operator is used to compose the operators in similar manner to what you're used to with dot-chaining.
             .pipe(
-                catchError((error: Response) => Observable.throw(error.json))
+                catchError((error: Response) => throwError(error))
             );
     }
 
@@ -70,7 +70,7 @@ export class QuestionService {
         const url = urljoin(this.questionsUrl, answer.question._id.toString(), 'answers');
         return this.http.post(url, body, { headers })
             .pipe(
-                catchError((error: Response) => Observable.throw(error.json))
+                catchError((error: Response) => throwError(error))
             );
     }
 

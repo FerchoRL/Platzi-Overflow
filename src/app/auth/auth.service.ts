@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import urljoin from 'url-join';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 
@@ -22,7 +22,7 @@ export class AuthService {
     }
 
     //Method to signIn
-    signIn(user: User) : Observable<any>{
+    signIn(user: User): Observable<any>{
         const body = JSON.stringify(user);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         
@@ -35,7 +35,7 @@ export class AuthService {
                 }),
                 catchError((error: Response) => {
                     console.log(error);
-                    return Observable.throw(error.json);
+                    return throwError(error);
                 })
             );
     }
@@ -61,5 +61,24 @@ export class AuthService {
         localStorage.clear();
         this.currentUser = null;
         this.router.navigateByUrl('/');
+    }
+
+    signup(user: User, secondPass: string){
+        //If I need to send more parameters in my body from fronted:
+        const body = JSON.stringify({user,'secondPass':secondPass});
+        console.log("myBody: "+body);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post(urljoin(this.usersUrl, 'signup'), body, { headers })
+            .pipe(
+                
+                map((response: any)=>{
+                    this.login(response);
+                    return response;
+                }),
+                catchError((error: Response) => {
+                    console.log(error);
+                    return throwError(error);
+                })
+            );
     }
 }

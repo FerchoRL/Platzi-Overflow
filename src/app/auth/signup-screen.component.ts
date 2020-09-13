@@ -1,6 +1,7 @@
 //Create a ts component for my sign-up screen component
 import { Component,OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
 import { User } from './user.model';
 
 @Component({
@@ -15,6 +16,8 @@ import { User } from './user.model';
 //Also we need to add ReactiveFormsModule on app module
 export class SignUpScreenComponent implements OnInit{
 	signupForm: FormGroup;
+
+	constructor(private authService: AuthService){}
 	ngOnInit(){
 
 		//implement all the validators for each field of my form
@@ -41,9 +44,14 @@ export class SignUpScreenComponent implements OnInit{
 	onSubmit(){
 		//When click on sign up save all the fields in User
 		if (this.signupForm.valid) {
-			const { email, password, firstName, lastName } = this.signupForm.value;
+			const { email, password, firstName, lastName, secondPass } = this.signupForm.value;
 			const user = new User(email, password, firstName, lastName);
 			console.log(user);
+			this.authService.signup(user, secondPass)
+				.subscribe(
+					this.authService.login,
+					err => console.log(err)
+				)
 		}
 		else{
 			console.log("is invalid");
