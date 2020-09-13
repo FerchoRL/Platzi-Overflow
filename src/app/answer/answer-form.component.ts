@@ -2,11 +2,13 @@
 import { Component,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import SweetScroll from 'sweet-scroll';
+import { Router } from '@angular/router';
 
 import { Answer } from './answer.model';
 import { User } from '../auth/user.model';
 import { Question } from '../question/question.model';
 import { QuestionService } from '../question/question.service';
+import { AuthService } from '../auth/auth.service'
 
 //Indicate where can I find the template, which selector I will use and the css
 @Component({
@@ -20,11 +22,19 @@ export class AnswerFormComponent{
 	@Input() question: Question;
 	sweetScroll: SweetScroll;
 
-	constructor(private questionService: QuestionService){
+	constructor(
+		private questionService: QuestionService,
+		private authService: AuthService,
+		private router: Router
+		){
 		this.sweetScroll = new SweetScroll();
 	}
 	//Call my component answer(onSubmit) and send parameters (create an object)
 	onSubmit(form: NgForm){
+		//If user is not loggin when create an answer then go to signin window
+		if (!this.authService.isLoggedIn()) {
+			this.router.navigateByUrl('/signin');
+		}
 		const answer = new Answer(
 			form.value.answerDescription,
 			this.question
@@ -37,7 +47,7 @@ export class AnswerFormComponent{
 					this.question.answers.unshift(a),
 					this.sweetScroll.to('#title-answers')
 				},
-				error => console.log(error)
+				this.authService.handleError
 			);
 		form.reset();
 		console.log(answer.question);

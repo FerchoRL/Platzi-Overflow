@@ -50,7 +50,7 @@ export class SignUpScreenComponent implements OnInit{
 			this.authService.signup(user, secondPass)
 				.subscribe(
 					this.authService.login,
-					err => console.log(err)
+					this.authService.handleError
 				)
 		}
 		else{

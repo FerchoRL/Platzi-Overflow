@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Question } from './question.model';
 import icons from './icons';
 import { QuestionService } from './question.service';
+import { AuthService } from '../auth/auth.service'
 
 
 
@@ -15,11 +16,22 @@ import { QuestionService } from './question.service';
     providers: [QuestionService]//To conect my backend with my frontend
 })
 
-export class QuestionFormComponent{
+export class QuestionFormComponent implements OnInit{
     //Inject QuestionServie and Router
-    constructor(private questionService: QuestionService, private router: Router){}
+    constructor(
+        private questionService: QuestionService,
+        private authService: AuthService,
+        private router: Router
+        ){}
     icons: Object[] = icons;
     loading = true;
+
+    ngOnInit(){
+        //If user is not loggin when create a question then go to signin window
+        if (!this.authService.isLoggedIn()) {
+			this.router.navigateByUrl('/signin');
+		}
+    }
 
     getIconVersion(icon: any){
         let version;
@@ -45,8 +57,9 @@ export class QuestionFormComponent{
             .subscribe(
                 //Get question _id and go to the question detail with router navigation passing the path and id
                 ({ _id }) => this.router.navigate(['/questions', _id]),
-                //({ _id }) => console.log(_id),
-                error => console.log(error)
+                //({ _id }) => console.log(_id),}
+                //No envia el mensaje correcto en el snack bar
+                this.authService.handleError
             );
         form.resetForm();
     }

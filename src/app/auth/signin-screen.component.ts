@@ -37,7 +37,7 @@ export class SignInScreenComponent implements OnInit{
 				.subscribe(
 					//If signin correct then login
 					this.authService.login,
-					err => console.log(err)
+					this.authService.handleError
 				);
 			console.log(user);
 		}else{
