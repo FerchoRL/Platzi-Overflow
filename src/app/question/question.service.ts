@@ -46,8 +46,9 @@ export class QuestionService {
         //Create an string of the question
         const body = JSON.stringify(question);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const token = this.getToken();
         //Create the post to our questionsUrl
-        return this.http.post(this.questionsUrl, body, { headers })
+        return this.http.post(this.questionsUrl+token, body, { headers })
         //catch is replaced with catchError and the pipe operator is used to compose the operators in similar manner to what you're used to with dot-chaining.
             .pipe(
                 catchError((error: Response) => throwError(error))
@@ -66,9 +67,10 @@ export class QuestionService {
         //Our body only contain the question id and the description
         const body = JSON.stringify(a);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const token = this.getToken();
         //Create the post to our answersUrl
         const url = urljoin(this.questionsUrl, answer.question._id.toString(), 'answers');
-        return this.http.post(url, body, { headers })
+        return this.http.post(url+this.getToken(), body, { headers })
             .pipe(
                 catchError((error: Response) => throwError(error))
             );
@@ -78,5 +80,10 @@ export class QuestionService {
         const errMsg = error.message ? error.message : 
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.log(errMsg);
+    }
+
+    getToken(){
+        const token = localStorage.getItem('token');
+        return `?token=${token}`;
     }
 }

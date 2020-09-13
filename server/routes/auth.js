@@ -1,21 +1,11 @@
 import express from 'express';
-import Debug from 'debug';
 import jwt from 'jsonwebtoken';
+import Debug from 'debug';
+import { secret } from '../config';
+import { findUserByEmail, users } from '../middleware'
 
 const app = express.Router();
-const debug = Debug('Platzi-overflow: auth');
-
-const users = [
-    {
-        firstName: 'Fercho',
-        lastName: 'Lagunes',
-        email: 'rlfernando7@gmail.com',
-        password: '12345',
-        _id: 123
-    }
-];
-
-const secret = 'miclavesecreta';
+const debug = Debug('Platzi-overflow: auth-middleware');
 
 app.post('/signin', (req, res, next) =>{
     const { email, password } = req.body;//email and password from client
@@ -77,13 +67,6 @@ app.post('/signup',(req,res) =>{
     }
     
 })
-
-/* is the same than next function
-const findUserByEmail = e => users.find(({ email }) => email === e)*/
-//Function to return an user by email
-function findUserByEmail(email){
-    return users.find(user => user.email === email);
-}
 
 function comparePass(providedPass, userPass){
     return providedPass === userPass;
