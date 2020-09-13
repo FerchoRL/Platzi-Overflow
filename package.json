@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "hammerjs": "^2.0.8",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.4",
     "rxjs": "~6.5.5",
     "sweet-scroll": "^4.0.0",
