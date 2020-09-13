@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import urljoin from 'url-join';
-import { environment } from '../../environments/environment'
-import { User } from './user.model'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError, map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+import { User } from './user.model';
 
 @Injectable()
 export class AuthService {
-    usersUrl: string
-    currentUser?: User
+    usersUrl: string;
+    currentUser?: User;
 
     constructor(private http: HttpClient){
         this.usersUrl = urljoin(environment.apiUrl,'auth');
         if (this.isLoggedIn()){
             const { userId, email, firstName, lastName } = JSON.parse(localStorage.getItem('user'));
-            this.currentUser = new User(email,null,firstName,lastName,userId)
+            this.currentUser = new User(email,null,firstName,lastName,userId);
         }
     }
 
@@ -34,8 +34,8 @@ export class AuthService {
                 catchError((error: Response) => {
                     console.log(error);
                     return Observable.throw(error.json);
-                }
-            )
+                })
+            );
     }
 
     login = ({ token, userId, firstName, lastName, email}) => {
@@ -49,6 +49,6 @@ export class AuthService {
 
     isLoggedIn(){
         //if is different nul, then the user is logged
-        return localStorage.getItem('token') !== null
+        return localStorage.getItem('token') !== null;
     }
 }

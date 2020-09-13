@@ -1,11 +1,12 @@
 //Create a ts component for my answer-form component
 import { Component,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import SweetScroll from 'sweet-scroll';
+
 import { Answer } from './answer.model';
 import { User } from '../auth/user.model';
 import { Question } from '../question/question.model';
-import { QuestionService } from '../question/question.service'
-import SweetScroll from 'sweet-scroll'
+import { QuestionService } from '../question/question.service';
 
 //Indicate where can I find the template, which selector I will use and the css
 @Component({
@@ -20,7 +21,7 @@ export class AnswerFormComponent{
 	sweetScroll: SweetScroll;
 
 	constructor(private questionService: QuestionService){
-		this.sweetScroll = new SweetScroll()
+		this.sweetScroll = new SweetScroll();
 	}
 	//Call my component answer(onSubmit) and send parameters (create an object)
 	onSubmit(form: NgForm){
@@ -38,7 +39,7 @@ export class AnswerFormComponent{
 				},
 				error => console.log(error)
 			);
-			form.reset();
+		form.reset();
 		console.log(answer.question);
 		//Agrego la respuesta que genere aqui a la propiedad answer de mi pregunta
 		//this.question.answer.unshift(answer);

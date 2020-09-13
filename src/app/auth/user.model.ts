@@ -9,6 +9,6 @@ export class User{
 	{}
 
 	fullName(){
-		return `${this.firstName} ${this.lastName}`
+		return `${this.firstName} ${this.lastName}`;
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Question } from './question.model';
-import { QuestionService } from './question.service'
+import { QuestionService } from './question.service';
 
 @Component({
 	selector: 'app-question-list',
@@ -22,7 +23,7 @@ export class QuestionListComponent implements OnInit{
 			.then((questions: Question[]) =>{
 				this.questions = questions;
 				this.loading = false;//When charge all questions
-				console.log(this.questions)
+				console.log(this.questions);
 			})
 	}
 }

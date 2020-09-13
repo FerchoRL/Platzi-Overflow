@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { Question } from './question.model';
 import icons from './icons';
 import { QuestionService } from './question.service';
-import { Router } from '@angular/router';
+
 
 
 @Component({

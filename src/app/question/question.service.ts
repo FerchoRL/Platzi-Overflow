@@ -1,11 +1,12 @@
 //Add an anotation to the class to inject in the components
 import { Injectable } from '@angular/core';
-import { Question } from './question.model';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import urljoin from 'url-join';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+import { Question } from './question.model';
+import { environment } from '../../environments/environment';
 import { Answer } from '../answer/answer.model';
 
 
@@ -28,7 +29,7 @@ export class QuestionService {
         return this.http.get(this.questionsUrl)
             .toPromise()//To get a correct or incorrect response
             .then(response => response as Question[])
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     //Url to get question id
@@ -60,13 +61,13 @@ export class QuestionService {
             question:{
                 _id: answer.question._id
             }
-        }
+        };
         //Create an string of the question
         //Our body only contain the question id and the description
         const body = JSON.stringify(a);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         //Create the post to our answersUrl
-        const url = urljoin(this.questionsUrl, answer.question._id.toString(), 'answers')
+        const url = urljoin(this.questionsUrl, answer.question._id.toString(), 'answers');
         return this.http.post(url, body, { headers })
             .pipe(
                 catchError((error: Response) => Observable.throw(error.json))

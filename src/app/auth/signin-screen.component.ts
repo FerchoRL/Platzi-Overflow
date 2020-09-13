@@ -1,6 +1,6 @@
 //Create a ts component for my sign-in screen component
 import { Component,OnInit } from '@angular/core';
-import { FormControl,FormGroup,Validators } from '@angular/forms'
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { User } from '../auth/user.model';
 
 @Component({

@@ -25,4 +25,4 @@ const modules = [
 	exports: modules
 })
 
-export class MaterialModule{}
+export class MaterialModule{};

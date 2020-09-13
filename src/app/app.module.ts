@@ -3,9 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { QuestionDetailComponent } from './question/question-detail.component';
 import { MomentModule } from 'angular2-moment';
@@ -13,7 +15,6 @@ import { AnswerFormComponent } from './answer/answer-form.component';
 import { SignInScreenComponent } from './auth/signin-screen.component';
 import { SignUpScreenComponent } from './auth/signup-screen.component';
 import { QuestionListComponent } from './question/question-list.component';
-import { MatListModule } from '@angular/material/list';
 import { QuestionFormComponent } from './question/question-form.component';
 import { Routing } from './app.routing';
 
@@ -44,4 +45,4 @@ import { Routing } from './app.routing';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { };

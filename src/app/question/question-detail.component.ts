@@ -1,8 +1,10 @@
 //Create a ts component for my question-detail component
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { Question } from './question.model';
 import { QuestionService } from './question.service'
-import { ActivatedRoute } from '@angular/router';
+
 @Component({
 	selector: 'app-question-detail',
 	templateUrl: './question-detail.component.html',
@@ -20,7 +22,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy{
 		'devicon-android-plain'
 	);*/
 
-	question?: Question
+	question?: Question;
 	loading = true;
 	sub: any;
 
@@ -38,6 +40,6 @@ export class QuestionDetailComponent implements OnInit, OnDestroy{
 
 	//Unsubcriber the sub
 	ngOnDestroy(){
-		this.sub.unsubscribe()
+		this.sub.unsubscribe();
 	}
 }

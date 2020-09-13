@@ -8,4 +8,4 @@ export class Answer{
 		public createDate?: Date,
 		public user?: User
 	){}
-}
+};
