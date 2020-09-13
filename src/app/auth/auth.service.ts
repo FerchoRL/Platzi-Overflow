@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import urljoin from 'url-join';
 import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
@@ -12,7 +13,7 @@ export class AuthService {
     usersUrl: string;
     currentUser?: User;
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private router: Router){
         this.usersUrl = urljoin(environment.apiUrl,'auth');
         if (this.isLoggedIn()){
             const { userId, email, firstName, lastName } = JSON.parse(localStorage.getItem('user'));
@@ -21,15 +22,16 @@ export class AuthService {
     }
 
     //Method to signIn
-    signIn(user: User){
+    signIn(user: User) : Observable<any>{
         const body = JSON.stringify(user);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post(urljoin(this.usersUrl,'signin'), body, { headers })
+        
+        return this.http.post(urljoin(this.usersUrl, 'signin'), body, { headers })
             .pipe(
+                
                 map((response: any)=>{
-                    const json = response.json();
                     this.login(response);
-                    return json;
+                    return response;
                 }),
                 catchError((error: Response) => {
                     console.log(error);
@@ -45,10 +47,19 @@ export class AuthService {
         //Seria interesante ver la diferencia con la siguiente linea
         //localStorage.setItem('user', JSON.stringify(this.currentUser));
         localStorage.setItem('user', JSON.stringify( { userId, firstName, lastName, email }));
+        //After signin go home
+        this.router.navigateByUrl('/');
     }
 
     isLoggedIn(){
-        //if is different nul, then the user is logged
+        //if is different null, then the user is logged
         return localStorage.getItem('token') !== null;
+    }
+
+    logout(){
+        //Clean the local storage and current user is null
+        localStorage.clear();
+        this.currentUser = null;
+        this.router.navigateByUrl('/');
     }
 }

@@ -4,22 +4,43 @@
   <!--With routeLink '/' indicate go to home-->
   <span [routerLink]="['/']">PlatziOverflow</span>
   <span class="space"></span>
-  <mat-icon [routerLink]="['/signin']">account_circle</mat-icon>
+  
+  <!--If user is not loggin-->
+
+  <button *ngIf="!isLoggedIn()" [routerLink]="['/signin']" mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  
+  <!--If user is loggin-->
+  <div *ngIf="isLoggedIn()">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        {{ fullName() }}
+      </button>
+      <button mat-menu-item (click)="logout()">
+        Cerrar sesíon
+      </button>
+    </mat-menu>
+  </div>
+  
 </mat-toolbar>
 
 <router-outlet></router-outlet>
 <!--Create app questions detail
-<app-question-detail></app-question-detail>-->
-
-<!--Create app sign-in screen
-<app-signin-screen></app-signin-screen>-->
-
-<!--Create app sign-up screen
-<app-signup-screen></app-signup-screen>-->
-
-<!--Create app question-list screen 
-<app-question-list></app-question-list>-->
-
-
-<!--- create app-question form screen
-<app-question-form></app-question-form>-->
+  <app-question-detail></app-question-detail>-->
+  
+  <!--Create app sign-in screen
+    <app-signin-screen></app-signin-screen>-->
+    
+    <!--Create app sign-up screen
+      <app-signup-screen></app-signup-screen>-->
+      
+      <!--Create app question-list screen 
+        <app-question-list></app-question-list>-->
+        
+        
+        <!--- create app-question form screen
+          <app-question-form></app-question-form>-->

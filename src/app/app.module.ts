@@ -17,6 +17,7 @@ import { SignUpScreenComponent } from './auth/signup-screen.component';
 import { QuestionListComponent } from './question/question-list.component';
 import { QuestionFormComponent } from './question/question-form.component';
 import { Routing } from './app.routing';
+import { AuthService } from './auth/auth.service'
 
 
 //Indicate which modules or declarations I will use in my project
@@ -42,7 +43,7 @@ import { Routing } from './app.routing';
     Routing,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { };

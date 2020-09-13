@@ -9,7 +9,7 @@ const users = [
     {
         firstName: 'Fercho',
         lastName: 'Lagunes',
-        email: 'rlfernando7@getMaxListeners.com',
+        email: 'rlfernando7@gmail.com',
         password: '12345',
         _id: 123
     }

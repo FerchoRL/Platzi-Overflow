@@ -2,6 +2,7 @@
 import { Component,OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { User } from '../auth/user.model';
+import { AuthService } from './auth.service';
 
 @Component({
 	selector: 'app-signin-screen',
@@ -14,6 +15,8 @@ import { User } from '../auth/user.model';
 //Also we need to add ReactiveFormsModule on app module
 export class SignInScreenComponent implements OnInit{
 	signinForm: FormGroup;
+
+	constructor(private authService: AuthService){}
 
 	ngOnInit(){
 		this.signinForm = new FormGroup({
@@ -30,6 +33,12 @@ export class SignInScreenComponent implements OnInit{
 		if (this.signinForm.valid) {
 			const { email, password } = this.signinForm.value;
 			const user = new User(email,password);
+			this.authService.signIn(user)
+				.subscribe(
+					//If signin correct then login
+					this.authService.login,
+					err => console.log(err)
+				);
 			console.log(user);
 		}else{
 			console.log("You write an invalid user");
