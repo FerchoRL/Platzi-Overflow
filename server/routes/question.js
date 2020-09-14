@@ -2,6 +2,8 @@ import express from 'express';
 
 import { required } from '../middleware';
 import { question } from '../db-api';
+import { handleError } from '../utils'
+import { async } from 'rxjs/internal/scheduler/async';
 
 const app = express.Router();
 
@@ -15,24 +17,26 @@ const currentUser = {
 //Create functions to receive methods from frontend
 
 //Question subpaths for apis
-// GET api/questions: get all the question with method get
+// GET api/questions: get all the question with method get calling DB with async
 app.get('/', async (req, res) => {
     try {
         const questions = await question.findAll();
         res.status(200).json(questions)
     } catch (error) {
-        res.status(500).json({
-            message: 'An error ocured when try to get all questions',
-            error
-        })
+        handleError(error,res,'An error ocured when try to get all questions');
     }
     
 });
 
-//GET api/questions/:id. Get only question with the id
-//First execute questionMiddleware and then with the next, execute the next middleware
-app.get('/:id', (req, res) => {
-    res.status(200).json(req.question);//question from middleware
+//GET api/questions/:id. Get only question with the id calling DB with async
+app.get('/:id', async (req, res) => {
+    try {
+        const q = await question.findById(req.params.id)
+        res.status(200).json(q);
+    } catch (error) {
+        handleError(error,res,`An error ocured when try to get question with Id ${req.params.id}`);
+    }
+    
 });
 
 // POST /api/questions

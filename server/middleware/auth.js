@@ -4,23 +4,7 @@ import { secret } from '../config';
 
 const debug = Debug('Platzi-overflow: auth-middleware');
 
-export const users = [
-    {
-        firstName: 'Fercho',
-        lastName: 'Lagunes',
-        email: 'rlfernando7@gmail.com',
-        password: '12345',
-        _id: 123
-    }
-];
-
-/* is the same than next function
-const findUserByEmail = e => users.find(({ email }) => email === e)*/
-//Function to return an user by email
-export const findUserByEmail = (email) => {
-    return users.find(user => user.email === email);
-}
-
+//Verify if user haz an correct token to add questions and answers
 export const required = (req, res, next) => {
   //Verify token is valid then call next middleware. If not 401 
   jwt.verify(req.query.token, secret, (err,token) => {

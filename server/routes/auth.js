@@ -2,14 +2,16 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import Debug from 'debug';
 import { secret } from '../config';
-import { findUserByEmail, users } from '../middleware'
+import { User } from '../models'
+
 
 const app = express.Router();
 const debug = Debug('Platzi-overflow: auth-middleware');
 
-app.post('/signin', (req, res, next) =>{
-    const { email, password } = req.body;//email and password from client
-    const user = findUserByEmail(email);
+app.post('/signin', async (req, res, next) =>{
+    const { email, password } = req.body;//email and password from fronted
+    //Find user in DB
+    const user = await User.findOnde({ email });
 
     //If email not found or password don't match
 
@@ -37,21 +39,21 @@ app.post('/signin', (req, res, next) =>{
 });
 
 //Create method for Sign up
-app.post('/signup',(req,res) =>{
+app.post('/signup', async (req,res) =>{
     //How to receive more parameter from frontend
     const { firstName, lastName, email, password } = req.body.user;
     const { secondPass } = req.body;
     console.log('password: '+password+' secondPass: '+secondPass)
-    const user = {
-        _id: +new Date(),
+    const u = new User({
         firstName,
         lastName,
         email,
         password
-    }
+    });
     if (password === secondPass) {
-        debug(`Creating new user: ${user}`);
-        users.push(user);
+        debug(`Creating new user: ${u}`);
+        //To send the new user to DB (I guess)
+        const user = await u.save();
         const token = createToken(user);
         res.status(201).json({
             message: 'User saved',
