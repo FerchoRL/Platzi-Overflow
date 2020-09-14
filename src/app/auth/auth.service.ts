@@ -67,7 +67,7 @@ export class AuthService {
     signup(user: User, secondPass: string){
         //If I need to send more parameters in my body from fronted:
         const body = JSON.stringify({user,'secondPass':secondPass});
-        console.log("myBody: "+body);
+        //console.log("myBody: "+body);
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.post(urljoin(this.usersUrl, 'signup'), body, { headers })
             .pipe(
@@ -87,9 +87,9 @@ export class AuthService {
         this.snackBar.open(message,'x',{ duration: 2500});
     }
 
+    //No me funciona bien
     public handleError = (error: any) => {
         const { error: { name }, message } = error;
-        console.log('name: '+error);
         if (name === 'TokenExpiredError') {
             this.showError('Tu sesion ha expirado');
         } else if ( name === 'JsonWebTokenError') {

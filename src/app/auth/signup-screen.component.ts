@@ -46,7 +46,7 @@ export class SignUpScreenComponent implements OnInit{
 		if (this.signupForm.valid) {
 			const { email, password, firstName, lastName, secondPass } = this.signupForm.value;
 			const user = new User(email, password, firstName, lastName);
-			console.log(user);
+			//console.log(user);
 			this.authService.signup(user, secondPass)
 				.subscribe(
 					this.authService.login,

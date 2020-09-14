@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import Debug from 'debug';
 import { secret } from '../config';
 import { User } from '../models'
+import { hashSync as hash, compareSync as comparePasswords } from 'bcryptjs'
 
 
 const app = express.Router();
@@ -11,7 +12,7 @@ const debug = Debug('Platzi-overflow: auth-middleware');
 app.post('/signin', async (req, res, next) =>{
     const { email, password } = req.body;//email and password from fronted
     //Find user in DB
-    const user = await User.findOnde({ email });
+    const user = await User.findOne({ email });
 
     //If email not found or password don't match
 
@@ -19,8 +20,8 @@ app.post('/signin', async (req, res, next) =>{
         debug (`User with email ${email} not found`);
         return handleLoginFailed(res, 'El usuario con ese correo no existe');
     }
-
-    if(!comparePass(password, user.password)){
+    //Use comparePasswords from bycrypjs to compare pass with encript
+    if(!comparePasswords(password, user.password)){
         debug (`Passwords do not match: ${password} !=== ${user.password}`);
         return handleLoginFailed(res, 'El correo y la contraseña no coinciden');
     }
@@ -43,12 +44,12 @@ app.post('/signup', async (req,res) =>{
     //How to receive more parameter from frontend
     const { firstName, lastName, email, password } = req.body.user;
     const { secondPass } = req.body;
-    console.log('password: '+password+' secondPass: '+secondPass)
+    //console.log('password: '+password+' secondPass: '+secondPass)
     const u = new User({
         firstName,
         lastName,
         email,
-        password
+        password: hash(password, 10)
     });
     if (password === secondPass) {
         debug(`Creating new user: ${u}`);
@@ -69,10 +70,6 @@ app.post('/signup', async (req,res) =>{
     }
     
 })
-
-function comparePass(providedPass, userPass){
-    return providedPass === userPass;
-}
 
 const createToken = (user) => jwt.sign({ user }, secret, { expiresIn: 86400 });
 
