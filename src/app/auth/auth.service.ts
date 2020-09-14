@@ -87,7 +87,7 @@ export class AuthService {
         this.snackBar.open(message,'x',{ duration: 2500});
     }
 
-    public handleError = (error) => {
+    public handleError = (error: any) => {
         const { error: { name }, message } = error;
         console.log('name: '+error);
         if (name === 'TokenExpiredError') {

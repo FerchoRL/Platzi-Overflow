@@ -1,8 +1,7 @@
 import express from 'express';
 
-import { required,
-questionMiddleware,
-questionsMiddleware } from '../middleware'
+import { required } from '../middleware';
+import { question } from '../db-api';
 
 const app = express.Router();
 
@@ -17,16 +16,27 @@ const currentUser = {
 
 //Question subpaths for apis
 // GET api/questions: get all the question with method get
-app.get('/', questionsMiddleware, (req, res) => res.status(200).json(req.questions));
+app.get('/', async (req, res) => {
+    try {
+        const questions = await question.findAll();
+        res.status(200).json(questions)
+    } catch (error) {
+        res.status(500).json({
+            message: 'An error ocured when try to get all questions',
+            error
+        })
+    }
+    
+});
 
 //GET api/questions/:id. Get only question with the id
 //First execute questionMiddleware and then with the next, execute the next middleware
-app.get('/:id', questionMiddleware, (req, res) => {
+app.get('/:id', (req, res) => {
     res.status(200).json(req.question);//question from middleware
 });
 
 // POST /api/questions
-app.post('/', required, questionsMiddleware, (req, res) => {
+app.post('/', required, (req, res) => {
     const question = req.body;
     question._id = +new Date();// number of seconds since 1970
     question.user = req.user;//User from middleware
@@ -39,7 +49,7 @@ app.post('/', required, questionsMiddleware, (req, res) => {
 //Endpoint to create answers in the question
 // POST /api/questions/:id/answer
 //Use required middleware to validate user is loggin to create an answer
-app.post('/:id/answers', required, questionMiddleware, (req,res) => {
+app.post('/:id/answers', required, (req,res) => {
     const answer = req.body;
     const question = req.question;
     answer.createDate = new Date();
