@@ -4,19 +4,25 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently -r \"npm run start:server\" \"npm run start:client\"",
-    "build": "ng build",
+    "start:server": "NODE_ENV=development DEBUG=platzi-overflow* nodemon server/index.js --exec babel-node",
+    "start:client": "ng serve",
+    "start-prod": "NODE_ENV=development node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "NODE_ENV=development DEBUG=platzi-overflow* nodemon server/index.js --exec babel-node",
-    "start:client": "ng serve"
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "ng build --configuration=production",
+    "build:server": "babel server --out-dir dist/server",
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^10.0.14",
     "@angular/cdk": "^10.1.3",
+    "@angular/cli": "~10.0.8",
     "@angular/common": "~10.0.14",
     "@angular/compiler": "~10.0.14",
+    "@angular/compiler-cli": "~10.0.14",
     "@angular/core": "~10.0.14",
     "@angular/forms": "~10.0.14",
     "@angular/http": "^7.2.16",
@@ -44,6 +50,7 @@
     "rxjs": "~6.5.5",
     "sweet-scroll": "^4.0.0",
     "tslib": "^2.0.0",
+    "typescript": "~3.9.5",
     "url-join": "^4.0.1",
     "zone.js": "~0.10.3"
   },

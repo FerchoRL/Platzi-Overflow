@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 import { question,auth } from './routes';
 //import formidable from 'express-formidable'
 //Nos devuelve en una variable nuestro servidor
@@ -22,6 +23,11 @@ if (process.env.NODE_ENV === 'development'){
     });
 }
 
+//If we are in a production environment
+if (process.env.NODE_ENV === 'production'){
+    //use files in dist
+    app.use(express.static(path.join(process.cwd(), 'dist')))
+}
 //Declare my services and endpoint when use the server, Main path
 app.use('/api/questions', question);
 app.use('/api/auth', auth);
