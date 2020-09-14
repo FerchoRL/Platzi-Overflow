@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  //App link production
+  apiUrl: 'https://infinite-thicket-07682.herokuapp.com/'
 };
