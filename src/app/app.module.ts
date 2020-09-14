@@ -15,6 +15,7 @@ import { AnswerFormComponent } from './answer/answer-form.component';
 import { SignInScreenComponent } from './auth/signin-screen.component';
 import { SignUpScreenComponent } from './auth/signup-screen.component';
 import { QuestionListComponent } from './question/question-list.component';
+import { QuestionScreenComponent } from './question/question-screen.component';
 import { QuestionFormComponent } from './question/question-form.component';
 import { Routing } from './app.routing';
 import { AuthService } from './auth/auth.service'
@@ -29,7 +30,8 @@ import { AuthService } from './auth/auth.service'
     SignInScreenComponent,
     SignUpScreenComponent,
     QuestionListComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
+    QuestionScreenComponent
   ],
   imports: [
     BrowserModule,

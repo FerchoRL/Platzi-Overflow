@@ -1,0 +1,12 @@
+
+<mat-tab-group>
+    <!--Order and show the question list by date or answers num-->
+    <mat-tab label="Mas recientes">
+        <app-question-list sort='-createdDate'></app-question-list>
+    </mat-tab>
+    <mat-tab label="Hot">
+        <app-question-list sort='-answers.length'></app-question-list>
+    </mat-tab>
+</mat-tab-group>
+
+<button [routerLink]="['questions/new']" mat-mini-fab class="add-question">+</button>

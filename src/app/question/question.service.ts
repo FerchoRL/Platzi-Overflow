@@ -24,9 +24,9 @@ export class QuestionService {
     }
 
     //Url to get questionList
-    getQuestions(): Promise<void | Question[]>{
-        //Call http in the backend. 
-        return this.http.get(this.questionsUrl)
+    getQuestions(sort = '-createdDate'): Promise<void | Question[]>{
+        //Call http in the backend. Send sort as parameter to backend
+        return this.http.get(`${this.questionsUrl}?sort=${sort}`)
             .toPromise()//To get a correct or incorrect response
             .then(response => response as Question[])
             .catch(this.handleError);
