@@ -40,14 +40,22 @@ app.get('/:id', async (req, res) => {
 });
 
 // POST /api/questions
-app.post('/', required, (req, res) => {
-    const question = req.body;
-    question._id = +new Date();// number of seconds since 1970
-    question.user = req.user;//User from middleware
-    question.createdDate = new Date();
-    question.answers = [];
-    req.questions.push(question);
-    res.status(201).json(question);//Return response
+app.post('/', required, async (req, res) => {
+    const { title, description, icon } = req.body;
+    const q = {
+        title,
+        description,
+        icon,
+        user: req.user._id//From middleware auth required
+    };
+    try {
+        //In this part call to create in question in db_api (I guess)
+        const savedQuestion = await question.create(q);
+        res.status(201).json(savedQuestion);
+    } catch (error) {
+        handleError(error,res,`An error ocured when try create a new question`);
+    }
+    
 });
 
 //Endpoint to create answers in the question

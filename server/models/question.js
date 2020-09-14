@@ -11,8 +11,8 @@ const QuestionSchema = mongoose.Schema({
     icon: { type: String, required: true },
     //Type ObjectId and reference to the Schema model name we need
     user: { type: ObjectId, ref: 'User', required: true },
-    //Use [] because is an array of answers
-    answers: [{ type: ObjectId, ref: 'Answer', required: true}]
+    //Use [] because is an array of answers. Initialize empty
+    answers: [{ type: ObjectId, ref: 'Answer', default: [] }]
 })
 
 QuestionSchema.plugin(uniqueValidator);
